@@ -3,8 +3,8 @@
 #include "OneButton.h"
 
 const int channel = 12;                                           // midi channel (12 is 13)
-const int Pins[9] = {4, 6, 8, 9, 12, 18, 19, 20, 21};             // PINS THAT BUTTONS ARE CONNECTED TO
-const int togglePin = 23;                                         // PIN THAT TOGGLEBUTTON IS CONNECTED TO
+const int Pins[9] = {6, 8, A0, A5, 9, 4, A2, A1, A3} ;            // PINS THAT BUTTONS ARE CONNECTED TO in order: 
+const int togglePin = 12;                                         // PIN THAT TOGGLEBUTTON IS CONNECTED TO
 const int longPressTime = 500;                                    // NUMBER OF MS NEEDED TO TRIGGER LONG PRESS
 const int ledPin = 11;                                             // PIN THAT LED IS CONNECTED TO
 const int velocity = 120;
@@ -140,6 +140,7 @@ void ledFlicker() {
 void longpress(byte pitch) {
   Serial.println("LONGPRESS");
   noteOn(channel, baseNote + pitch, velocity);
+  delay(15);
   noteOff(channel, baseNote + pitch, velocity);
   MidiUSB.flush();
   ledFlicker();
